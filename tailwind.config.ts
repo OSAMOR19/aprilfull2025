@@ -9,6 +9,10 @@ export default {
   ],
   theme: {
   	extend: {
+		fontFamily: {
+        tech: ['Conthrax', 'Syncopate', 'sans-serif'],
+        display: ['Dancing Script', 'cursive'],
+      },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

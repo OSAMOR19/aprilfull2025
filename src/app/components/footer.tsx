@@ -1,4 +1,5 @@
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
+import Logo from "@/app/images/aprilfulllogo.png"
 
 export function Footer() {
   return (
@@ -6,11 +7,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/april%20banner-SGJKxQWNsyBCz4JKGzJ1sfzDDutWbf.jpeg"
-              alt="AprilFull Logo"
-              className="h-8 w-auto"
-            />
+          <img className="h-8 w-auto" src={Logo.src || "/placeholder.svg"} alt="AprilFull Logo" />
             <p className="text-gray-400">Nigeria's premier blockchain and entertainment event</p>
           </div>
 

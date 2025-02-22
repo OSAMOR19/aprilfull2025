@@ -4,6 +4,8 @@ import { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { ThemeToggle } from "@/app/components/theme-toggle"
+import Logo from "@/app/images/aprilfulllogo.png"
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -14,11 +16,7 @@ export function Navbar() {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0">
-              <img
-                className="h-8 w-auto"
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/april%20banner-SGJKxQWNsyBCz4JKGzJ1sfzDDutWbf.jpeg"
-                alt="AprilFull Logo"
-              />
+              <img className="h-8 w-auto" src={Logo.src || "/placeholder.svg"} alt="AprilFull Logo" />
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-8">
@@ -32,11 +30,13 @@ export function Navbar() {
               Tickets
             </Link>
             <Button variant="default">Register Now</Button>
+            <ThemeToggle />
           </div>
           <div className="flex md:hidden">
+            <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-primary"
+              className="ml-2 inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-primary"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
