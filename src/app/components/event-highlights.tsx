@@ -6,24 +6,24 @@ import { Gift, Laptop, GraduationCap, Award } from "lucide-react"
 
 const highlights = [
   {
-    title: "Business Grant",
-    description: "Top Qualified Applicants & Participants will be going home with Business Grants 🎉 🏆",
+    title: "Exclusive NFT Giveaways",
+    description: "Receive limited-edition NFTs and collectibles exclusive to event attendees!",
     icon: Gift,
   },
   {
-    title: "Free Laptops",
-    description: "Top Qualified Applicants & Participants will be going home with Laptops 🎉 🏆",
+    title: "Metaverse Experience",
+    description: "Dive into an immersive metaverse world with virtual performances and networking.",
     icon: Laptop,
   },
   {
-    title: "Tech Scholarships",
-    description: "Top Qualified Applicants & Participants will be going home with valuable scholarships 🎉 🏆",
-    icon: GraduationCap,
+    title: "Live Digital Performances",
+    description: "Enjoy live performances by artists revolutionizing entertainment with blockchain.",
+    icon: Award,
   },
   {
-    title: "Get Certificate",
-    description: "Earn a certificate of participation for joining our incredible tech event!",
-    icon: Award,
+    title: "Blockchain Gaming Zone",
+    description: "Experience the future of gaming with play-to-earn experiences and competitions.",
+    icon: GraduationCap,
   },
 ]
 
@@ -48,7 +48,7 @@ export function EventHighlights() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="bg-black/50 border-purple-500/20 text-white">
+              <Card className="bg-black/50 border-purple-500/20 text-white shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <CardHeader>
                   <highlight.icon className="h-12 w-12 text-primary mb-4" />
                   <CardTitle className="text-xl">{highlight.title}</CardTitle>
@@ -64,4 +64,3 @@ export function EventHighlights() {
     </section>
   )
 }
-

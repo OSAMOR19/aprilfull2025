@@ -1,4 +1,4 @@
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
+import { Facebook, Twitter, Instagram, Linkedin, } from "lucide-react"
 import Logo from "@/app/images/aprilfulllogo.png"
 
 export function Footer() {
@@ -49,16 +49,16 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-primary">
+              <a href="https://x.com/AprilFullShow" className="text-gray-400 hover:text-primary">
                 <Facebook className="h-6 w-6" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-primary">
+              <a href="https://x.com/AprilFullShow" className="text-gray-400 hover:text-primary">
                 <Twitter className="h-6 w-6" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-primary">
+              <a href="https://x.com/AprilFullShow" className="text-gray-400 hover:text-primary">
                 <Instagram className="h-6 w-6" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-primary">
+              <a href="https://x.com/AprilFullShow" className="text-gray-400 hover:text-primary">
                 <Linkedin className="h-6 w-6" />
               </a>
             </div>

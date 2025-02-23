@@ -8,6 +8,7 @@ import { Gallery } from "@/app/components/gallery"
 import { Testimonials } from "@/app/components/testimonials"
 import { Sponsors } from "@/app/components/sponsors"
 import { Footer } from "@/app/components/footer"
+import {Artists} from "@/app/components/artists"
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <EventHighlights />
       <EventSchedule />
       <Speakers />
+      <Artists/>
       <Gallery />
       <Testimonials />
       <Sponsors />

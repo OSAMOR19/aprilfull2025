@@ -10,6 +10,7 @@ import Img3 from "@/app/images/pic13.jpg"
 import Img4 from "@/app/images/pic6.jpg"
 import Img5 from "@/app/images/pic9.jpg"
 import { Russo_One, Dancing_Script } from "next/font/google"
+import Link from "next/link"
 
 // Initialize the fonts
 const russoOne = Russo_One({
@@ -95,13 +96,15 @@ export function Hero() {
             </span>
           </h3>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-white">
-            Africas Premiere WEB3 entertainment event where innovation meets creativity
+            Africa's Premier WEB3 entertainment event where innovation meets creativity
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-primary hover:bg-primary/90">
-              Get Your Tickets
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+          <Link href="/tickets">
+              <Button size="lg" className="bg-purple-500 text-light hover:bg-primary/90">
+                Get Your Tickets
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
             <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
               Become a Sponsor
             </Button>

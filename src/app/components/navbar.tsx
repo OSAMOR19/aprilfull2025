@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/app/components/theme-toggle"
 import Logo from "@/app/images/aprilfulllogo.png"
 
+
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -55,9 +56,13 @@ export function Navbar() {
             <Link href="#tickets" className="block px-3 py-2 text-foreground hover:text-primary">
               Tickets
             </Link>
-            <Button variant="default" className="w-full mt-4">
+
+            <Link href="/tickets">
+             <Button  variant="default" className="w-full mt-4">
               Register Now
             </Button>
+            </Link>
+            
           </div>
         </div>
       )}

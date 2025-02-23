@@ -1,35 +1,71 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import Chi from "@/app/images/chidi.svg"
+import Har from "@/app/images/harri.svg"
+import Pre from "@/app/images/preacher.svg"
+import Nob from "@/app/images/noblecoins.svg"
+import Sarah from "@/app/images/sarah.svg"
+import Zeus from "@/app/images/xeus.svg"
 
 const speakers = [
   {
-    name: "John Doe",
-    role: "Blockchain Expert",
-    image: "/placeholder.svg?height=400&width=400",
+    name: "Harri Obi",
+    image: Har,
+    delay: 0,
   },
   {
-    name: "Jane Smith",
-    role: "Entertainment Director",
-    image: "/placeholder.svg?height=400&width=400",
+    name: "Crypto-preacher",
+    image: Pre,
+    delay: 0.1,
   },
   {
-    name: "Mike Johnson",
-    role: "Tech Innovator",
-    image: "/placeholder.svg?height=400&width=400",
+    name: "NobleIronside",
+    image: Nob,
+    delay: 0.2,
   },
   {
-    name: "Sarah Williams",
-    role: "Industry Leader",
-    image: "/placeholder.svg?height=400&width=400",
+    name: "Sarah Idahosa",
+    image: Sarah,
+    delay: 0.3,
+  },
+  {
+    name: "Vindicated Chidi",
+    image: Chi,
+    delay: 0.4,
+  },
+  {
+    name: "Xeus",
+    image: Zeus,
+    delay: 0.5,
   },
 ]
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+}
+
 export function Speakers() {
   return (
-    <section className="py-24 bg-black text-white">
+    <section className="py-24 bg-background text-foreground relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -37,46 +73,51 @@ export function Speakers() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">Meet our speakers</h2>
-          <p className="text-gray-400">Industry leaders and innovators</p>
+          <h2 className="text-4xl font-bold mb-4">PROPOSED SPEAKERS</h2>
         </motion.div>
 
-        <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {speakers.map((speaker, index) => (
-              <motion.div
-                key={speaker.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="group relative"
-              >
-                <div className="relative overflow-hidden rounded-lg">
-                  <img
-                    src={speaker.image || "/placeholder.svg"}
-                    alt={speaker.name}
-                    className="w-full h-auto transform group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <h3 className="text-xl font-bold">{speaker.name}</h3>
-                    <p className="text-primary">{speaker.role}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="relative"
+        >
+          {/* Purple gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-primary/20 rounded-xl" />
 
-          <div className="flex justify-center mt-8 gap-4">
-            <Button variant="outline" size="icon">
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-            <Button variant="outline" size="icon">
-              <ChevronRight className="h-4 w-4" />
-            </Button>
+          {/* Border container */}
+          <div className="relative border border-primary/30 rounded-xl p-6 backdrop-blur-sm">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
+              {speakers.map((speaker) => (
+                <motion.div key={speaker.name} variants={itemVariants} className="group flex flex-col">
+                  <div className="relative h-[300px] md:h-[350px] lg:h-[400px] overflow-hidden rounded-lg mb-4">
+                    <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }} className="h-full">
+                      <img
+                        src={speaker.image.src || "/placeholder.svg"}
+                        alt={speaker.name}
+                        className="w-full h-full object-cover object-center"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </motion.div>
+                  </div>
+                  <motion.h3
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: speaker.delay }}
+                    className="text-center text-lg font-medium mt-auto"
+                  >
+                    {speaker.name}
+                  </motion.h3>
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
+        </motion.div>
+
+        {/* Decorative elements */}
+        <div className="absolute top-1/2 -left-24 w-48 h-48 bg-primary/30 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 -right-24 w-48 h-48 bg-primary/30 rounded-full blur-3xl" />
       </div>
     </section>
   )

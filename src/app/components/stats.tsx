@@ -3,10 +3,10 @@
 import { CountUp } from "@/app/components/count-up"
 
 const stats = [
-  { label: "Attendees", value: 28, suffix: "K+" },
-  { label: "Tech Scholarships", value: 500, suffix: "+" },
-  { label: "Online Community", value: 22, suffix: "K+" },
-  { label: "Post Event Enrollment", value: 1613, suffix: "+" },
+  { label: "Attendees", value: 3, suffix: "K+" },
+  { label: "NFTs Minted", value: 500, suffix: "+" },
+  { label: "Online Community", value: 20, suffix: "K+" },
+  { label: "Blockchain Projects", value: 7, suffix: "+" },
 ]
 
 export function Stats() {
@@ -17,7 +17,7 @@ export function Stats() {
           {stats.map((stat) => (
             <div key={stat.label} className="space-y-2">
               <CountUp end={stat.value} suffix={stat.suffix} />
-              <p className="text-primary font-medium">{stat.label}</p>
+              <p className="text-light font-medium">{stat.label}</p>
             </div>
           ))}
         </div>
