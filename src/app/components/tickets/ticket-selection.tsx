@@ -1,14 +1,37 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Minus, Plus } from "lucide-react"
-import Reg from "@/app/images/regular.svg"
-import Vip from "@/app/images/vip.svg"
-import Premium from "@/app/images/premium.svg"
-import Sofa from "@/app/images/sofa.svg"
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Minus, Plus } from "lucide-react";
+import Reg from "@/app/images/regular.svg";
+import Vip from "@/app/images/vip.svg";
+import Premium from "@/app/images/premium.svg";
+import Sofa from "@/app/images/sofa.svg";
 
-const tickets = [
+// Define the type for a ticket
+interface Ticket {
+  id: string;
+  name: string;
+  price: number;
+  image: any; // Use a more specific type if possible, e.g., `StaticImageData` from `next/image`
+  description: string;
+}
+
+// Define the type for a selected ticket
+interface SelectedTicket {
+  type: string;
+  price: number;
+  quantity: number;
+}
+
+// Define the type for the props
+interface TicketSelectionProps {
+  onSubmit: () => void;
+  updateTicketQuantity: (type: string, price: number, quantity: number) => void;
+  selectedTickets: SelectedTicket[];
+}
+
+const tickets: Ticket[] = [
   {
     id: "regular",
     name: "REGULAR",
@@ -37,23 +60,29 @@ const tickets = [
     image: Sofa,
     description: "Exclusive sofa lounge experience",
   },
-]
+];
 
-export function TicketSelection({ onSubmit, updateTicketQuantity, selectedTickets }) {
-  const getQuantity = (ticketId: string) => {
-    const ticket = selectedTickets.find((t) => t.type === tickets.find((ticket) => ticket.id === ticketId)?.name)
-    return ticket?.quantity || 0
-  }
+export function TicketSelection({
+  onSubmit,
+  updateTicketQuantity,
+  selectedTickets,
+}: TicketSelectionProps) {
+  const getQuantity = (ticketId: string): number => {
+    const ticket = selectedTickets.find(
+      (t) => t.type === tickets.find((ticket) => ticket.id === ticketId)?.name
+    );
+    return ticket?.quantity || 0;
+  };
 
-  const handleQuantityChange = (ticketId: string, delta: number) => {
-    const ticket = tickets.find((t) => t.id === ticketId)
-    if (!ticket) return
+  const handleQuantityChange = (ticketId: string, delta: number): void => {
+    const ticket = tickets.find((t) => t.id === ticketId);
+    if (!ticket) return;
 
-    const newQuantity = Math.max(0, getQuantity(ticketId) + delta)
-    updateTicketQuantity(ticket.name, ticket.price, newQuantity)
-  }
+    const newQuantity = Math.max(0, getQuantity(ticketId) + delta);
+    updateTicketQuantity(ticket.name, ticket.price, newQuantity);
+  };
 
-  const hasSelection = selectedTickets.length > 0
+  const hasSelection = selectedTickets.length > 0;
 
   return (
     <div className="space-y-6">
@@ -77,7 +106,9 @@ export function TicketSelection({ onSubmit, updateTicketQuantity, selectedTicket
               <div>
                 <h3 className="text-xl font-bold">{ticket.name}</h3>
                 <p className="text-muted-foreground mt-2">{ticket.description}</p>
-                <p className="text-2xl font-bold mt-4">₦{ticket.price.toLocaleString()}</p>
+                <p className="text-2xl font-bold mt-4">
+                  ₦{ticket.price.toLocaleString()}
+                </p>
               </div>
               <div className="flex items-center justify-between mt-4">
                 <div className="flex items-center space-x-4">
@@ -119,6 +150,5 @@ export function TicketSelection({ onSubmit, updateTicketQuantity, selectedTicket
         </Button>
       </div>
     </div>
-  )
+  );
 }
-
