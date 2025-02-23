@@ -44,21 +44,21 @@ const tickets: Ticket[] = [
     name: "VIP",
     price: 80000,
     image: Vip,
-    description: "VIP access with exclusive perks",
+    description: "...",
   },
   {
     id: "premium",
     name: "PREMIUM",
     price: 400000,
     image: Premium,
-    description: "Premium experience with all benefits",
+    description: "...",
   },
   {
     id: "sofa",
     name: "SOFA LOUNGE",
     price: 800000,
     image: Sofa,
-    description: "Exclusive sofa lounge experience",
+    description: "...",
   },
 ];
 
