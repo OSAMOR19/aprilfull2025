@@ -41,8 +41,8 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-4">Contact</h3>
             <ul className="space-y-2">
               <li className="text-gray-400">Lagos, Nigeria</li>
-              <li className="text-gray-400">info@aprilfull.com</li>
-              <li className="text-gray-400">+234 123 456 7890</li>
+              <li className="text-gray-400">Officialaprilfull@gmail.com</li>
+              <li className="text-gray-400">+2347039645057</li>
             </ul>
           </div>
 
