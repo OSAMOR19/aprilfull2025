@@ -1,10 +1,11 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Img1 from "@/app/images/paulguest.svg"
-import Img2 from "@/app/images/xploit.svg"
-import Img3 from "@/app/images/deaconfamous.svg"
-import Img4 from "@/app/images/comedian.svg"
+import Img4 from "@/app/images/famous.svg"
+import Img5 from "@/app/images/piuspaul.svg"
+import Img3 from "@/app/images/dasaint.svg"
+import Img2 from "@/app/images/xploitface.svg"
+import Img1 from "@/app/images/michealz.svg"
 import Logo from "@/app/images/betlogo.svg"
 import Image from "next/image"
 
@@ -32,8 +33,14 @@ const itemVariants = {
 }
 
 export function Artists() {
-  // Array of artist images
-  const artistImages = [Img1, Img2, Img3, Img4]
+  // Array of artist data with images and names
+  const artists = [
+    { image: Img1, name: "MicHealz" },
+    { image: Img2, name: "Xpliot" },
+    { image: Img3, name: "Da Saint" },
+    { image: Img4, name: "Deacon Famous" },
+    { image: Img5, name: "Pius Paul" },
+  ]
   
   return (
     <section className="py-24 bg-black text-white relative">
@@ -55,12 +62,12 @@ export function Artists() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="h-12 w-auto"
+            className="h-16 w-auto"
           >
             <Image 
               src={Logo} 
               alt="BlockChain Entertainment" 
-              className="h-12 w-auto"
+              className="h-16 w-auto"
             />
           </motion.div>
         </div>
@@ -73,24 +80,26 @@ export function Artists() {
           viewport={{ once: true }}
           className="border border-purple-700 rounded-xl p-8 bg-[#1e1433]"
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {artistImages.map((image, index) => (
+          <div className="grid grid-cols-5 gap-4">
+            {artists.map((artist, index) => (
               <motion.div
                 key={`artist-${index}`}
                 variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
-                className="aspect-square overflow-hidden rounded-lg bg-purple-900/50"
+                className="flex flex-col items-center"
               >
-                <div className="relative w-full h-full">
+                <div className="relative w-full rounded-lg bg-gradient-to-b from-purple-900/30 to-black/40 mb-3" style={{ height: "200px" }}>
                   <Image 
-                    src={image} 
-                    alt={`Artist ${index + 1}`} 
-                    className="w-full h-full object-cover"
-                    width={280}
-                    height={280}
+                    src={artist.image} 
+                    alt={artist.name} 
+                    className="w-full h-full object-cover object-top"
+                    width={200}
+                    height={250}
+                    style={{ objectPosition: "top" }}
                   />
                 </div>
+                <p className="text-center font-medium text-white">{artist.name}</p>
               </motion.div>
             ))}
           </div>

@@ -24,7 +24,7 @@ export function Convener() {
             </div>
             
             <div className="text-center md:text-left">
-              <h3 className="text-xl font-bold text-white">XPLIOT</h3>
+              <h3 className="text-xl font-bold text-white">XPLOIT</h3>
               <p className="text-lg text-white mt-1">APRILFULL</p>
             </div>
           </div>

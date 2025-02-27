@@ -38,13 +38,11 @@ export function Hero() {
             transition={{ duration: 0.8 }}
             className="space-y-8"
           >
-            <h2 className={`${russoOne.className} text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.1]`}>
-              BLOCK CHAIN
-              <br />
-              AND
+            <h3 className={`${russoOne.className} text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.1]`}>
+              BLOCKCHAIN AND
               <br />
               ENTERTAINMENT
-            </h2>
+            </h3>
             <p className="text-xl text-white/90 max-w-xl leading-relaxed">
               Africa's Premier WEB3 entertainment event where innovation meets creativity
             </p>

@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Pic1 from "@/app/images/pic1.jpg"
+import Pic1 from "@/app/images/carousel1.svg"
 import Pic2 from "@/app/images/pic2.jpg"
 import Pic3 from "@/app/images/pic3.jpg"
 import Pic4 from "@/app/images/pic4.jpg"
