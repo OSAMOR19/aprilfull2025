@@ -47,13 +47,20 @@ export function Hero() {
               Africa's Premier WEB3 entertainment event where innovation meets creativity
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-2 border-white text-white hover:bg-white/10 rounded-md text-lg h-14 px-8"
+            <a 
+                href="https://drive.google.com/file/d/1m5PLg_jL-NZSKe2DdCw0y9ZO4IPn4H1J/view?usp=sharing" 
+                download="BlockchainEntertainment_SponsorDeck.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Become a sponsor
-              </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-2 border-white text-white hover:bg-white/10 rounded-md text-lg h-14 px-8 w-full"
+                >
+                  Become a sponsor
+                </Button>
+              </a>
               <div className="relative">
                 <Link href="/tickets">
                   <Button size="lg" className="bg-[#9333EA] hover:bg-[#8829E0] text-white rounded-md text-lg h-14 px-8">
