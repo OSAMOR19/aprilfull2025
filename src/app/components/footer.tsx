@@ -1,5 +1,5 @@
 import { Facebook, Twitter, Instagram, Linkedin, } from "lucide-react"
-import Logo from "@/app/images/aprilfulllogo.png"
+import Logo from "@/app/images/betlogo.svg"
 
 export function Footer() {
   return (

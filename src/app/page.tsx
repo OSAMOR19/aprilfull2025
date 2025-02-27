@@ -5,7 +5,7 @@ import { EventSchedule } from "@/app/components/event-schedule"
 import { Stats } from "@/app/components/stats"
 import { Speakers } from "@/app/components/speakers"
 import { Gallery } from "@/app/components/gallery"
-import { Testimonials } from "@/app/components/testimonials"
+import { Convener } from "@/app/components/Convener"
 import { Sponsors } from "@/app/components/sponsors"
 import { Footer } from "@/app/components/footer"
 import {Artists} from "@/app/components/artists"
@@ -15,14 +15,14 @@ export default function Home() {
     <main className="min-h-screen bg-background text-foreground">
       <Navbar />
       <Hero />
-      <Stats />
+      {/* <Stats /> */}
       <EventHighlights />
       <EventSchedule />
       <Speakers />
       <Artists/>
+       <Sponsors />
       <Gallery />
-      <Testimonials />
-      <Sponsors />
+      <Convener />
       <Footer />
     </main>
   )

@@ -2,28 +2,28 @@
 
 import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Gift, Laptop, GraduationCap, Award } from "lucide-react"
+import { Contact, Globe, Mic2, Award } from "lucide-react"
 
 const highlights = [
   {
-    title: "Exclusive NFT Giveaways",
-    description: "Receive limited-edition NFTs and collectibles exclusive to event attendees!",
-    icon: Gift,
+    title: "Exclusive Guest Speakers ",
+    description: "Receive enlightening insights from blockchain experts.",
+    icon: Contact,
   },
   {
-    title: "Metaverse Experience",
-    description: "Dive into an immersive metaverse world with virtual performances and networking.",
-    icon: Laptop,
+    title: "Networking Opportunities ",
+    description: "Meet personalities and engage in industry conversation",
+    icon: Globe,
   },
   {
-    title: "Live Digital Performances",
-    description: "Enjoy live performances by artists revolutionizing entertainment with blockchain.",
-    icon: Award,
+    title: "Live Performances",
+    description: "Enjoy live performances by renowned popular artists.",
+    icon: Mic2,
   },
   {
-    title: "Blockchain Gaming Zone",
-    description: "Experience the future of gaming with play-to-earn experiences and competitions.",
-    icon: GraduationCap,
+    title: "Panel Sessions",
+    description: "Product Marketing and so much more",
+    icon: Mic2,
   },
 ]
 

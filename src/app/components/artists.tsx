@@ -1,36 +1,14 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Img from "@/app/images/artists.svg"
+import Img1 from "@/app/images/paulguest.svg"
+import Img2 from "@/app/images/xploit.svg"
+import Img3 from "@/app/images/deaconfamous.svg"
+import Img4 from "@/app/images/comedian.svg"
+import Logo from "@/app/images/betlogo.svg"
+import Image from "next/image"
 
-const artists = [
-  {
-    name: "Artist One",
-    role: "Hip Hop Artist",
-    delay: 0,
-  },
-  {
-    name: "Artist Two",
-    role: "R&B Singer",
-    delay: 0.1,
-  },
-  {
-    name: "Artist Three",
-    role: "Performer",
-    delay: 0.2,
-  },
-  {
-    name: "Artist Four",
-    role: "Music Producer",
-    delay: 0.3,
-  },
-  {
-    name: "Artist Five",
-    role: "DJ",
-    delay: 0.4,
-  },
-]
-
+// Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -54,79 +32,70 @@ const itemVariants = {
 }
 
 export function Artists() {
+  // Array of artist images
+  const artistImages = [Img1, Img2, Img3, Img4]
+  
   return (
-    <section className="py-24 bg-black text-white relative overflow-hidden">
+    <section className="py-24 bg-black text-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-start mb-12">
+        {/* Header with title and logo */}
+        <div className="flex justify-between items-center mb-8">
           <motion.h2
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
             viewport={{ once: true }}
             className="text-4xl font-bold"
           >
             PROPOSED ARTISTS
           </motion.h2>
-          <motion.img
+          
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            src={Img.src}
-            alt="BlockChain Entertainment"
             className="h-12 w-auto"
-          />
+          >
+            <Image 
+              src={Logo} 
+              alt="BlockChain Entertainment" 
+              className="h-12 w-auto"
+            />
+          </motion.div>
         </div>
 
+        {/* Artist grid container with border */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="relative"
+          className="border border-purple-700 rounded-xl p-8 bg-[#1e1433]"
         >
-          {/* Purple gradient border */}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-xl" />
-
-          {/* Content container */}
-          <div className="relative border border-primary/30 rounded-xl p-8 backdrop-blur-sm">
-            <div className="flex flex-nowrap overflow-x-auto md:overflow-visible gap-4 md:gap-0 pb-4 md:pb-0">
-              {artists.map((artist, index) => (
-                <motion.div
-                  key={artist.name}
-                  variants={itemVariants}
-                  className="group relative flex-shrink-0 w-48 md:w-1/5"
-                  style={{
-                    transform: `rotate(${index % 2 === 0 ? "-3deg" : "3deg"})`,
-                    zIndex: artists.length - index,
-                    marginLeft: index === 0 ? "0" : "-2rem",
-                  }}
-                >
-                  <motion.div
-                    whileHover={{
-                      scale: 1.05,
-                      rotate: 0,
-                      zIndex: 50,
-                    }}
-                    transition={{ duration: 0.3 }}
-                    className="relative aspect-[3/4] overflow-hidden rounded-lg"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    <img src={Img.src || "/placeholder.svg"} alt={artist.name} className="w-full h-full object-cover" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <p className="text-lg font-bold">{artist.name}</p>
-                      <p className="text-sm text-gray-300">{artist.role}</p>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              ))}
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {artistImages.map((image, index) => (
+              <motion.div
+                key={`artist-${index}`}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                className="aspect-square overflow-hidden rounded-lg bg-purple-900/50"
+              >
+                <div className="relative w-full h-full">
+                  <Image 
+                    src={image} 
+                    alt={`Artist ${index + 1}`} 
+                    className="w-full h-full object-cover"
+                    width={280}
+                    height={280}
+                  />
+                </div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
-
-        {/* Decorative elements */}
-        <div className="absolute top-1/2 -left-24 w-48 h-48 bg-primary/30 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 -right-24 w-48 h-48 bg-primary/30 rounded-full blur-3xl" />
       </div>
     </section>
   )
 }
-

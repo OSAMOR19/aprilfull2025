@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/app/components/theme-toggle"
-import Logo from "@/app/images/aprilfulllogo.png"
+import Logo from "@/app/images/aprilfullcorrect.svg"
 
 
 export function Navbar() {

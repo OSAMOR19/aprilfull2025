@@ -5,12 +5,13 @@ import Image from "next/image"
 import { cn } from "@/lib/utils"
 
 // Import images
-import Sp1 from "@/app/images/logos/atuzal.png"
-import Sp2 from "@/app/images/logos/ayetu.avif"
-import Sp3 from "@/app/images/logos/binance.png"
-import Sp4 from "@/app/images/logos/boundless.png"
-import Sp5 from "@/app/images/logos/bybit.png"
-import Sp6 from "@/app/images/logos/coinex.png"
+import Sp1 from "@/app/images/play2earnlogo.svg"
+import Sp2 from "@/app/images/coinexlogo.svg"
+import Sp3 from "@/app/images/smclogo.svg"
+import Sp4 from "@/app/images/wassetlogo.svg"
+import Sp5 from "@/app/images/womenlogo.svg"
+import Sp6 from "@/app/images/boundlesspay.svg"
+import Sp7 from "@/app/images/atuzallogo.svg"
 
 interface Sponsor {
   name: string
@@ -19,90 +20,119 @@ interface Sponsor {
     height: number
     width: number
   }
+  highlight?: boolean
 }
 
 export function Sponsors() {
   const sponsors: Sponsor[] = [
-    { name: "Atuzal", logo: Sp1 },
-    { name: "Ayetu", logo: Sp2 },
-    { name: "Binance", logo: Sp3 },
-    { name: "Boundless", logo: Sp4 },
-    { name: "Bybit", logo: Sp5 },
-    { name: "CoinEx", logo: Sp6 },
+    { name: "Play2Earn", logo: Sp1, highlight: true },
+    { name: "CoinEx", logo: Sp2 },
+    { name: "SMC", logo: Sp3 },
+    { name: "Wasset", logo: Sp4 },
+    { name: "Women In Blockchain", logo: Sp5 },
+    { name: "BoundlessPay", logo: Sp6 },
+    { name: "Atuzal", logo: Sp7 },
   ]
 
+  // Duplicate sponsors for infinite loop effect
   const duplicatedSponsors = [...sponsors, ...sponsors]
   const sliderRef = useRef<HTMLDivElement>(null)
-
+  
   useEffect(() => {
     const slider = sliderRef.current
     if (!slider) return
 
-    const pixelsPerSecond = 30
+    // Animation settings
+    const pixelsPerSecond = 25
     const containerWidth = slider.scrollWidth / 2
     const animationDuration = containerWidth / pixelsPerSecond
 
     let animationFrameId: number
     let startTime: number
+    let pauseAnimation = false
 
     const animate = (timestamp: number) => {
+      if (pauseAnimation) {
+        animationFrameId = requestAnimationFrame(animate)
+        return
+      }
+      
       if (!startTime) startTime = timestamp
       const progress = (timestamp - startTime) / (animationDuration * 1000)
-      const translateX = -(containerWidth * progress)
+      const translateX = -(containerWidth * progress) % containerWidth
 
+      // Reset once we complete a full loop
       if (progress >= 1) {
         startTime = timestamp
-        slider.style.transform = "translateX(0)"
-      } else {
-        slider.style.transform = `translateX(${translateX}px)`
       }
-
+      
+      slider.style.transform = `translateX(${translateX}px)`
       animationFrameId = requestAnimationFrame(animate)
     }
 
     animationFrameId = requestAnimationFrame(animate)
 
+    // Pause animation when page is not visible
     const handleVisibilityChange = () => {
-      if (document.hidden) {
-        cancelAnimationFrame(animationFrameId)
-      } else {
+      pauseAnimation = document.hidden
+      if (!pauseAnimation) {
         startTime = 0
-        animationFrameId = requestAnimationFrame(animate)
       }
     }
 
+    // Pause animation on hover
+    const handleMouseEnter = () => {
+      pauseAnimation = true
+    }
+
+    const handleMouseLeave = () => {
+      pauseAnimation = false
+      startTime = 0
+    }
+
+    slider.addEventListener('mouseenter', handleMouseEnter)
+    slider.addEventListener('mouseleave', handleMouseLeave)
     document.addEventListener("visibilitychange", handleVisibilityChange)
 
     return () => {
       cancelAnimationFrame(animationFrameId)
       document.removeEventListener("visibilitychange", handleVisibilityChange)
+      slider.removeEventListener('mouseenter', handleMouseEnter)
+      slider.removeEventListener('mouseleave', handleMouseLeave)
     }
   }, [])
 
   return (
-    <section className="relative py-24 bg-black overflow-hidden">
+    <section className="relative py-16 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center mb-16 text-white">Past Sponsors</h2>
+        <h2 className="text-2xl font-bold text-center mb-12 text-black">OUR SPONSORS AND PARTNERS</h2>
 
         <div className="relative w-full overflow-hidden">
-          {/* Gradient overlays */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-r from-black to-transparent" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-l from-black to-transparent" />
+          {/* Gradient overlays for fade effect */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-r from-white to-transparent" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-l from-white to-transparent" />
 
-          {/* Slider */}
+          {/* Logos slider */}
           <div className="w-full overflow-hidden">
             <div
               ref={sliderRef}
-              className={cn("inline-flex items-center", "transition-transform duration-[0ms] ease-linear")}
+              className="inline-flex items-center transition-transform duration-[0ms] ease-linear"
             >
               {duplicatedSponsors.map((sponsor, index) => (
-                <div key={`${sponsor.name}-${index}`} className="flex items-center justify-center mx-8 md:mx-12">
-                  <div className="relative w-32 h-24 md:w-40 md:h-28 flex items-center justify-center p-4 bg-gray-900/50 rounded-md hover:bg-gray-800/50 transition-all duration-300">
+                <div key={`${sponsor.name}-${index}`} className="flex items-center justify-center px-4">
+                  <div 
+                    className={cn(
+                      "relative w-32 h-20 flex items-center justify-center p-2 rounded-md",
+                      "transition-all duration-300 hover:scale-105",
+                      "border border-gray-200 bg-white shadow-sm",
+                      sponsor.highlight ? "ring-2 ring-purple-600 ring-offset-2 ring-offset-white" : ""
+                    )}
+                  >
                     <Image
                       src={sponsor.logo.src || "/placeholder.svg"}
                       alt={`${sponsor.name} logo`}
                       fill
-                      className="object-contain p-4 filter brightness-100 hover:brightness-110 transition-all duration-300"
+                      className="object-contain p-2 transition-all duration-300"
                     />
                   </div>
                 </div>
@@ -114,4 +144,3 @@ export function Sponsors() {
     </section>
   )
 }
-
