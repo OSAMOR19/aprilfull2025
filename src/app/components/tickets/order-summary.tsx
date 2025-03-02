@@ -1,16 +1,29 @@
-"use client"
+"use client";
 
-import { motion, AnimatePresence } from "framer-motion"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 
 type TicketType = {
-  type: string
-  quantity: number
-  price: number
+  type: string;
+  quantity: number;
+  price: number;
+};
+
+interface OrderSummaryProps {
+  tickets: TicketType[];
+  step: number;
+  goToNextStep: () => void; // Add this prop
 }
 
-export function OrderSummary({ tickets = [], step }: { tickets: TicketType[]; step: number }) {
-  const total = tickets.reduce((sum, ticket) => sum + ticket.price * ticket.quantity, 0)
+export default function OrderSummary({
+  tickets = [],
+  step,
+  goToNextStep,
+}: OrderSummaryProps) {
+  const total = tickets.reduce(
+    (sum, ticket) => sum + ticket.price * ticket.quantity,
+    0
+  );
 
   return (
     <motion.div
@@ -34,7 +47,9 @@ export function OrderSummary({ tickets = [], step }: { tickets: TicketType[]; st
             >
               <div>
                 <p className="font-medium">{ticket.type}</p>
-                <p className="text-sm text-muted-foreground">Quantity: {ticket.quantity}</p>
+                <p className="text-sm text-muted-foreground">
+                  Quantity: {ticket.quantity}
+                </p>
               </div>
               <motion.p
                 key={ticket.quantity}
@@ -51,19 +66,22 @@ export function OrderSummary({ tickets = [], step }: { tickets: TicketType[]; st
         <div className="border-t pt-4">
           <div className="flex justify-between font-bold">
             <p>Total</p>
-            <motion.p key={total} initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
+            <motion.p
+              key={total}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+            >
               ₦{total.toLocaleString()}
             </motion.p>
           </div>
         </div>
 
         {step < 3 && (
-          <Button className="w-full mt-4" disabled>
+          <Button className="w-full mt-4" onClick={goToNextStep}>
             Continue
           </Button>
         )}
       </div>
     </motion.div>
-  )
+  );
 }
-

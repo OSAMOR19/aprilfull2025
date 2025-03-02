@@ -56,7 +56,7 @@ export function Hero() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="border-2 border-white text-white hover:bg-white/10 rounded-md text-lg h-14 px-8 w-full"
+                  className="border-2  text-white hover:bg-white/10 rounded-md text-lg h-14 px-8 w-full"
                 >
                   Become a sponsor
                 </Button>

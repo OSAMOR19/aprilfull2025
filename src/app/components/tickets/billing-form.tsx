@@ -122,7 +122,7 @@ export function BillingForm({ onSubmit }: BillingFormProps) {
       </div>
 
       <div className="flex justify-end">
-        <Button type="submit" size="lg">
+        <Button  type="submit" size="lg">
           Continue to Payment
         </Button>
       </div>
