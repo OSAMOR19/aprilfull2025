@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CreditCard, Wallet, Building } from "lucide-react";
-import { PaystackButton } from "react-paystack";
+import { usePaystackPayment } from "react-paystack";
 
 interface PaymentMethod {
   id: string;
@@ -16,7 +16,7 @@ interface PaymentMethod {
 }
 
 interface PaymentSectionProps {
-  onSubmit: (method: string) => void;
+  onSubmit: (method: string, reference?: any) => void;
   amount: number;
   email: string;
   fullName: string;
@@ -45,34 +45,55 @@ const paymentMethods: PaymentMethod[] = [
 
 export function PaymentSection({ onSubmit, amount, email, fullName }: PaymentSectionProps) {
   const [method, setMethod] = useState<string>("card");
-
-  // Fetch public key from environment variable
-  const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY;
-
-  useEffect(() => {
-    if (!publicKey) {
-      console.error("Paystack public key is not set. Please check your .env.local file.");
-    }
-  }, [publicKey]);
-
-  // Paystack configuration
-  const paystackConfig = {
+  
+  // TEMPORARY: Hardcoded key for testing - REPLACE with your actual test key
+  // IMPORTANT: Remove this hardcoded key before production
+  const publicKey = "pk_test_8fc17c5cbd11c204138c919bcd070aa7715c37c7"; 
+  
+  // Create the configuration for Paystack
+  const config = {
+    reference: (new Date()).getTime().toString(),
     email,
     amount: amount * 100, // Paystack expects amount in Kobo
-    publicKey: publicKey || "",
-    text: "Complete Purchase",
-    onSuccess: (reference: any) => {
-      console.log("Payment successful: ", reference);
-      alert("Payment successful!");
-      onSubmit("success");
-    },
-    onClose: () => {
-      console.log("Payment closed");
-    },
+    publicKey,
+    firstname: fullName.split(' ')[0],
+    lastname: fullName.split(' ').slice(1).join(' '),
+    label: 'Complete Payment',
+    channels: method === "card" ? ['card'] : ['bank_transfer'],
+  };
+
+  // Success callback
+  const onSuccess = (reference: any) => {
+    console.log("Payment successful: ", reference);
+    alert("Payment successful!");
+    onSubmit("success", reference);
+  };
+
+  // Close callback
+  const onClose = () => {
+    console.log("Payment closed");
+    onSubmit("closed");
+  };
+
+  // Initialize the Paystack payment hook
+  const initializePayment = usePaystackPayment(config);
+
+  // Handle payment initiation
+  const handlePayment = () => {
+    if (method === "crypto") {
+      alert("Crypto payments coming soon");
+      return;
+    }
+    
+    // Pass callbacks as an object
+    initializePayment({
+      onSuccess,
+      onClose
+    });
   };
 
   return (
-    <motion.form
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -100,17 +121,16 @@ export function PaymentSection({ onSubmit, amount, email, fullName }: PaymentSec
       </RadioGroup>
 
       <div className="flex justify-end">
-        {method === "card" || method === "transfer" ? (
-          <PaystackButton
-            className="w-full bg-primary text-white rounded-lg p-3"
-            {...paystackConfig}
-          />
-        ) : (
-          <Button type="submit" size="lg" disabled>
-            Coming Soon
-          </Button>
-        )}
+        <Button 
+          onClick={handlePayment} 
+          disabled={method === "crypto"}
+          type="button"
+          size="lg"
+          className="w-full bg-primary text-white"
+        >
+          {method === "crypto" ? "Coming Soon" : "Complete Purchase"}
+        </Button>
       </div>
-    </motion.form>
+    </motion.div>
   );
 }
